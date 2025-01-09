@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="szamitKoltseget.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            }
+    </style>
+</head>
+<body class="bg-indigo-600">
+    <div class="bg-transparent max-w-[1000px] m-auto h-screen">
+        <h1 class="text-5xl font-bold text-center underline text-indigo-200 pt-3 pb-[50px]">Autó kölcsönző</h1>
+        <div class="max-w-[800px] h-[500px] block  m-auto  content-center">
+            <form class="flex justify-center flex-col items-center bg-slate-50 max-w-[500px] m-auto rounded-[10px] shadow-xl">
+                    <label for="underline_select" class="sr-only">Underline select</label>
+                    <select id="tipus" class="block rounded-[10px] py-2.5 px-0 w-full text-sm text-indigo-600 bg-transparent border-0 border-b-2 border-gray-200  dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                        <option value="gazdaságos">Gazdaságos</option>
+                        <option value="családi">Családi</option>
+                        <option value="luxus">Luxus</option>
+                    </select>
+                    <p>Kérsz biztosítást?</p>
+                    <div class="block">
+                        <input type="radio" name="biztositas" value="true" id=""><label>Igen</label>
+                        <input type="radio" name="biztositas" value="false" checked id=""><label>Nem</label>
+                    </div>
+                    
+                <p>Hány napra kölcsönzi az autót?</p>
+                <input class="appearance-none transition" placeholder="Napok száma:" type="number" id="nap">
+        
+                <input class="bg-indigo-100 pl-2 pr-2 pt-1 pb-1 rounded hover:scale-[1.1] hover:bg-indigo-200 transition shadow-xl" type="button" value="Számol" onclick="szamol()">
+        
+                <div id="tarolo">
+        
+                </div>
+            </form>
+        </div>
+
+    </div>
+    
+    <script>
+        function szamol(){
+            console.log("klikk");
+            const tipus = document.getElementById("tipus").value
+            console.log(tipus);
+            const biztositas = document.querySelector("input[name='biztositas']:checked").value =="true"
+            const nap = +document.getElementById("nap").value
+            const kolcsonzes = {   kolcsonzesiIdo: nap,   autoTipus: tipus,   extraBiztositas: biztositas,   osszesKoltseg: 0, };
+            const koltseg = szamitKoltseget(kolcsonzes)
+            console.log(koltseg);
+            document.getElementById("tarolo").innerHTML= "A kölcsönzés összes költsége: " + koltseg + " Ft"
+        }
+    </script>
+</body>
+</html>
